@@ -75,7 +75,7 @@ class Ui_LeftColumn(object):
         font.setPointSize(16)
         self.label_1.setFont(font)
         self.label_1.setStyleSheet(u"font-size: 16pt")
-        self.label_1.setAlignment(Qt.AlignCenter)
+        self.label_1.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(self.label_1)
 

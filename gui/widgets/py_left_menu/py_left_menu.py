@@ -18,6 +18,7 @@
 # ///////////////////////////////////////////////////////////////
 from qt_core import *
 
+
 # IMPORT BUTTON AND DIV
 # ///////////////////////////////////////////////////////////////
 from . py_left_menu_button import PyLeftMenuButton
@@ -31,8 +32,8 @@ from gui.core.functions import *
 # ///////////////////////////////////////////////////////////////
 class PyLeftMenu(QWidget):
     # SIGNALS
-    clicked = Signal(object)
-    released = Signal(object)
+    clicked = pyqtSignal(object)
+    released = pyqtSignal(object)
 
     def __init__(
         self,
@@ -93,8 +94,8 @@ class PyLeftMenu(QWidget):
         # TOGGLE BUTTON AND DIV MENUS
         # ///////////////////////////////////////////////////////////////
         self.toggle_button = PyLeftMenuButton(
-            app_parent, 
-            text = toggle_text, 
+            app_parent,
+            text = toggle_text,
             tooltip_text = toggle_tooltip,
             dark_one = self._dark_one,
             dark_three = self._dark_three,
@@ -169,7 +170,7 @@ class PyLeftMenu(QWidget):
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
         self.clicked.emit(self.menu)
-    
+
     def btn_released(self):
         self.released.emit(self.menu)
 
@@ -254,13 +255,13 @@ class PyLeftMenu(QWidget):
         self.bottom_layout.setSpacing(1)
 
         # ADD TOP AND BOTTOM FRAME
-        self._layout.addWidget(self.top_frame, 0, Qt.AlignTop)
-        self._layout.addWidget(self.bottom_frame, 0, Qt.AlignBottom)
+        self._layout.addWidget(self.top_frame, 0, Qt.AlignmentFlag.AlignTop)
+        self._layout.addWidget(self.bottom_frame, 0, Qt.AlignmentFlag.AlignBottom)
 
         # ADD BG TO LAYOUT
         self.left_menu_layout.addWidget(self.bg)
 
-        
 
-        
+
+
 

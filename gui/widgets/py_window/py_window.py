@@ -35,7 +35,7 @@ class PyWindow(QFrame):
     def __init__(
         self,
         parent,
-        layout = Qt.Vertical,
+        layout = Qt.Orientation.Vertical,
         margin = 0,
         spacing = 2,
         bg_color = "#2c313c",
@@ -56,7 +56,7 @@ class PyWindow(QFrame):
         # PROPERTIES
         # ///////////////////////////////////////////////////////////////
         self.parent = parent
-        self.layout = layout
+        self._layout_type = layout
         self.margin = margin
         self.bg_color = bg_color
         self.text_color = text_color
@@ -67,23 +67,23 @@ class PyWindow(QFrame):
         self.enable_shadow = enable_shadow
 
         # OBJECT NAME
-        # ///////////////////////////////////////////////////////////////   
+        # ///////////////////////////////////////////////////////////////
         self.setObjectName("pod_bg_app")
 
         # APPLY STYLESHEET
-        # /////////////////////////////////////////////////////////////// 
+        # ///////////////////////////////////////////////////////////////
         self.set_stylesheet()
 
         # ADD LAYOUT
         # ///////////////////////////////////////////////////////////////
-        if layout == Qt.Vertical:
+        if layout == Qt.Orientation.Vertical:
             # VERTICAL LAYOUT
-            self.layout = QHBoxLayout(self)
+            self.main_layout = QVBoxLayout(self)
         else:
             # HORIZONTAL LAYOUT
-            self.layout = QHBoxLayout(self)
-        self.layout.setContentsMargins(margin, margin, margin, margin)
-        self.layout.setSpacing(spacing)
+            self.main_layout = QHBoxLayout(self)
+        self.main_layout.setContentsMargins(margin, margin, margin, margin)
+        self.main_layout.setSpacing(spacing)
 
         # ADD DROP SHADOW
         # ///////////////////////////////////////////////////////////////
@@ -139,4 +139,3 @@ class PyWindow(QFrame):
             _text_color = internal_text_color,
             _text_font = internal_text_font
         ))
-        

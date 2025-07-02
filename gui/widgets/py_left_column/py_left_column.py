@@ -32,8 +32,8 @@ from gui.uis.columns.ui_left_column import Ui_LeftColumn
 
 class PyLeftColumn(QWidget):
     # SIGNALS
-    clicked = Signal(object)
-    released = Signal(object)
+    clicked = pyqtSignal(object)
+    released = pyqtSignal(object)
 
     def __init__(
         self,
@@ -91,7 +91,7 @@ class PyLeftColumn(QWidget):
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
         self.clicked.emit(self.btn_close)
-    
+
     def btn_released(self):
         self.released.emit(self.btn_close)
 
@@ -109,7 +109,7 @@ class PyLeftColumn(QWidget):
         self.title_frame.setMaximumHeight(47)
         self.title_frame.setMinimumHeight(47)
 
-        # TITLE BASE LAYOUT 
+        # TITLE BASE LAYOUT
         self.title_base_layout = QVBoxLayout(self.title_frame)
         self.title_base_layout.setContentsMargins(5,3,5,3)
 
@@ -136,7 +136,7 @@ class PyLeftColumn(QWidget):
         self.icon_layout.setContentsMargins(0,0,0,0)
         self.icon_layout.setSpacing(5)
         self.icon = PyIcon(self._icon_path, self._icon_color)
-        self.icon_layout.addWidget(self.icon, Qt.AlignCenter, Qt.AlignCenter)
+        self.icon_layout.addWidget(self.icon, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # LABEL
         self.title_label = QLabel(self._text_title)

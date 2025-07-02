@@ -45,8 +45,8 @@ _old_size = QSize()
 # ///////////////////////////////////////////////////////////////
 class PyTitleBar(QWidget):
     # SIGNALS
-    clicked = Signal(object)
-    released = Signal(object)
+    clicked = pyqtSignal(object)
+    released = pyqtSignal(object)
 
     def __init__(
         self,
@@ -86,7 +86,7 @@ class PyTitleBar(QWidget):
         self._app_parent = app_parent
         self._btn_bg_color = btn_bg_color
         self._btn_bg_color_hover = btn_bg_color_hover
-        self._btn_bg_color_pressed = btn_bg_color_pressed  
+        self._btn_bg_color_pressed = btn_bg_color_pressed
         self._context_color = context_color
         self._icon_color = icon_color
         self._icon_color_hover = icon_color_hover
@@ -157,7 +157,7 @@ class PyTitleBar(QWidget):
         self.bg_layout.addLayout(self.custom_buttons_layout)
 
         # ADD Buttons
-        if is_custom_title_bar:            
+        if is_custom_title_bar:
             self.bg_layout.addWidget(self.minimize_button)
             self.bg_layout.addWidget(self.maximize_restore_button)
             self.bg_layout.addWidget(self.close_button)
@@ -205,7 +205,7 @@ class PyTitleBar(QWidget):
     # ///////////////////////////////////////////////////////////////
     def btn_clicked(self):
         self.clicked.emit(self.menu)
-    
+
     def btn_released(self):
         self.released.emit(self.menu)
 
@@ -220,7 +220,7 @@ class PyTitleBar(QWidget):
     def maximize_restore(self, e = None):
         global _is_maximized
         global _old_size
-        
+
         # CHANGE UI AND RESIZE GRIP
         def change_ui():
             if _is_maximized:
