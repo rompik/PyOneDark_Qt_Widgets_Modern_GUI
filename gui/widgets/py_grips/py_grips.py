@@ -41,7 +41,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.top_left_grip)
             grip.setFixedSize(self.wi.top_left_grip.size())
             self.setGeometry(5, 5, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.top_left_grip.setStyleSheet("background: transparent")
@@ -53,7 +53,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.top_right_grip)
             grip.setFixedSize(self.wi.top_right_grip.size())
             self.setGeometry(self.parent.width() - 20, 5, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.top_right_grip.setStyleSheet("background: transparent")
@@ -65,7 +65,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.bottom_left_grip)
             grip.setFixedSize(self.wi.bottom_left_grip.size())
             self.setGeometry(5, self.parent.height() - 20, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.bottom_left_grip.setStyleSheet("background: transparent")
@@ -77,7 +77,7 @@ class PyGrips(QWidget):
             grip = QSizeGrip(self.wi.bottom_right_grip)
             grip.setFixedSize(self.wi.bottom_right_grip.size())
             self.setGeometry(self.parent.width() - 20, self.parent.height() - 20, 15, 15)
-            
+
             # ENABLE COLOR
             if disable_color:
                 self.wi.bottom_right_grip.setStyleSheet("background: transparent")
@@ -223,21 +223,21 @@ class Widgets(object):
         self.top_grip.setObjectName(u"top_grip")
         self.top_grip.setGeometry(QRect(0, 0, 500, 10))
         self.top_grip.setStyleSheet(u"background-color: rgb(85, 255, 255);")
-        self.top_grip.setCursor(QCursor(Qt.SizeVerCursor))
+        self.top_grip.setCursor(QCursor(Qt.CursorShape.SizeVerCursor))
 
     def bottom(self, form):
         self.bottom_grip = QFrame(form)
         self.bottom_grip.setObjectName(u"bottom_grip")
         self.bottom_grip.setGeometry(QRect(0, 0, 500, 10))
         self.bottom_grip.setStyleSheet(u"background-color: rgb(85, 170, 0);")
-        self.bottom_grip.setCursor(QCursor(Qt.SizeVerCursor))
+        self.bottom_grip.setCursor(QCursor(Qt.CursorShape.SizeVerCursor))
 
     def left(self, form):
         self.left_grip = QFrame(form)
         self.left_grip.setObjectName(u"left")
         self.left_grip.setGeometry(QRect(0, 10, 10, 480))
         self.left_grip.setMinimumSize(QSize(10, 0))
-        self.left_grip.setCursor(QCursor(Qt.SizeHorCursor))
+        self.left_grip.setCursor(QCursor(Qt.CursorShape.SizeHorCursor))
         self.left_grip.setStyleSheet(u"background-color: rgb(255, 121, 198);")
 
     def right(self, form):
@@ -245,5 +245,5 @@ class Widgets(object):
         self.right_grip.setObjectName(u"right")
         self.right_grip.setGeometry(QRect(0, 0, 10, 500))
         self.right_grip.setMinimumSize(QSize(10, 0))
-        self.right_grip.setCursor(QCursor(Qt.SizeHorCursor))
+        self.right_grip.setCursor(QCursor(Qt.CursorShape.SizeHorCursor))
         self.right_grip.setStyleSheet(u"background-color: rgb(255, 0, 127);")

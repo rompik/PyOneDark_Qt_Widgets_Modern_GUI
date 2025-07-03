@@ -80,14 +80,14 @@ class PyCredits(QWidget):
 
         # ADD COPYRIGHT TEXT
         self.copyright_label = QLabel(self._copyright)
-        self.copyright_label.setAlignment(Qt.AlignVCenter)
+        self.copyright_label.setAlignment(Qt.AlignmentFlag.AlignVCenter)
 
         # ADD VERSION TEXT
         self.version_label = QLabel(self._version)
-        self.version_label.setAlignment(Qt.AlignVCenter)
+        self.version_label.setAlignment(Qt.AlignmentFlag.AlignVCenter)
 
         # SEPARATOR
-        self.separator = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.separator = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         # ADD TO LAYOUT
         self.bg_layout.addWidget(self.copyright_label)

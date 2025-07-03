@@ -44,16 +44,16 @@ class PyTitleButton(QPushButton):
         is_active = False
     ):
         super().__init__()
-        
+
         # SET DEFAULT PARAMETERS
         self.setFixedSize(width, height)
-        self.setCursor(Qt.PointingHandCursor)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setObjectName(btn_id)
 
         # PROPERTIES
         self._bg_color = bg_color
         self._bg_color_hover = bg_color_hover
-        self._bg_color_pressed = bg_color_pressed        
+        self._bg_color_pressed = bg_color_pressed
         self._icon_color = icon_color
         self._icon_color_hover = icon_color_hover
         self._icon_color_pressed = icon_color_pressed
@@ -100,7 +100,7 @@ class PyTitleButton(QPushButton):
         paint = QPainter()
         paint.begin(self)
         paint.setRenderHint(QPainter.RenderHint.Antialiasing)
-        
+
         if self._is_active:
             # BRUSH
             brush = QBrush(QColor(self._context_color))
@@ -110,11 +110,11 @@ class PyTitleButton(QPushButton):
 
         # CREATE RECTANGLE
         rect = QRect(0, 0, self.width(), self.height())
-        paint.setPen(Qt.NoPen)
+        paint.setPen(Qt.PenStyle.NoPen)
         paint.setBrush(brush)
         paint.drawRoundedRect(
-            rect, 
-            self._set_border_radius, 
+            rect,
+            self._set_border_radius,
             self._set_border_radius
         )
 
@@ -128,19 +128,19 @@ class PyTitleButton(QPushButton):
     # Functions with custom styles
     # ///////////////////////////////////////////////////////////////
     def change_style(self, event):
-        if event == QEvent.Enter:
+        if event == QEvent.Type.Enter:
             self._set_bg_color = self._bg_color_hover
             self._set_icon_color = self._icon_color_hover
-            self.repaint()         
-        elif event == QEvent.Leave:
+            self.repaint()
+        elif event == QEvent.Type.Leave:
             self._set_bg_color = self._bg_color
             self._set_icon_color = self._icon_color
             self.repaint()
-        elif event == QEvent.MouseButtonPress:            
+        elif event == QEvent.Type.MouseButtonPress:
             self._set_bg_color = self._bg_color_pressed
             self._set_icon_color = self._icon_color_pressed
             self.repaint()
-        elif event == QEvent.MouseButtonRelease:
+        elif event == QEvent.Type.MouseButtonRelease:
             self._set_bg_color = self._bg_color_hover
             self._set_icon_color = self._icon_color_hover
             self.repaint()
@@ -149,7 +149,7 @@ class PyTitleButton(QPushButton):
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):
-        self.change_style(QEvent.Enter)
+        self.change_style(QEvent.Type.Enter)
         self.move_tooltip()
         self._tooltip.show()
 
@@ -157,7 +157,7 @@ class PyTitleButton(QPushButton):
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):
-        self.change_style(QEvent.Leave)
+        self.change_style(QEvent.Type.Leave)
         self.move_tooltip()
         self._tooltip.hide()
 
@@ -165,8 +165,8 @@ class PyTitleButton(QPushButton):
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.change_style(QEvent.MouseButtonPress)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.change_style(QEvent.Type.MouseButtonPress)
             # SET FOCUS
             self.setFocus()
             # EMIT SIGNAL
@@ -176,8 +176,8 @@ class PyTitleButton(QPushButton):
     # Event triggered after the mouse button is released
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.change_style(QEvent.MouseButtonRelease)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.change_style(QEvent.Type.MouseButtonRelease)
             # EMIT SIGNAL
             return self.released.emit()
 
@@ -186,17 +186,18 @@ class PyTitleButton(QPushButton):
     def icon_paint(self, qp, image, rect):
         icon = QPixmap(image)
         painter = QPainter(icon)
-        painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
+        painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceIn)
         if self._is_active:
-            painter.fillRect(icon.rect(), self._icon_color_active)
+            color = QColor(self._icon_color_active)
         else:
-            painter.fillRect(icon.rect(), self._set_icon_color)
-        qp.drawPixmap(
-            (rect.width() - icon.width()) / 2, 
-            (rect.height() - icon.height()) / 2,
-            icon
-        )        
+            color = QColor(self._set_icon_color)
+        painter.fillRect(icon.rect(), color)
         painter.end()
+        qp.drawPixmap(
+            int((rect.width() - icon.width()) / 2),
+            int((rect.height() - icon.height()) / 2),
+            icon
+        )
 
     # SET ICON
     # ///////////////////////////////////////////////////////////////
@@ -227,9 +228,9 @@ class PyTitleButton(QPushButton):
 # ///////////////////////////////////////////////////////////////
 class _ToolTip(QLabel):
     # TOOLTIP / LABEL StyleSheet
-    style_tooltip = """ 
-    QLabel {{		
-        background-color: {_dark_one};	
+    style_tooltip = """
+    QLabel {{
+        background-color: {_dark_one};
         color: {_text_foreground};
         padding-left: 10px;
         padding-right: 10px;
@@ -241,7 +242,7 @@ class _ToolTip(QLabel):
     """
     def __init__(
         self,
-        parent, 
+        parent,
         tooltip,
         dark_one,
         context_color,

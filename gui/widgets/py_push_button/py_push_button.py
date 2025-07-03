@@ -26,13 +26,13 @@ QPushButton {{
     padding-left: 10px;
     padding-right: 5px;
     color: {_color};
-	border-radius: {_radius};	
+	border-radius: {_radius};
 	background-color: {_bg_color};
 }}
 QPushButton:hover {{
 	background-color: {_bg_color_hover};
 }}
-QPushButton:pressed {{	
+QPushButton:pressed {{
 	background-color: {_bg_color_pressed};
 }}
 '''
@@ -41,7 +41,7 @@ QPushButton:pressed {{
 # ///////////////////////////////////////////////////////////////
 class PyPushButton(QPushButton):
     def __init__(
-        self, 
+        self,
         text,
         radius,
         color,
@@ -56,7 +56,7 @@ class PyPushButton(QPushButton):
         self.setText(text)
         if parent != None:
             self.setParent(parent)
-        self.setCursor(Qt.PointingHandCursor)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
 
         # SET STYLESHEET
         custom_style = style.format(
@@ -68,4 +68,3 @@ class PyPushButton(QPushButton):
         )
         self.setStyleSheet(custom_style)
 
-        

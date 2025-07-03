@@ -136,11 +136,11 @@ class PyLeftButton(QPushButton):
             self._set_bg_color = self._bg_color
             self._set_icon_color = self._icon_color
             self.repaint()
-        elif event == QEvent.MouseButtonPress:
+        elif event == QEvent.Type.MouseButtonRealese:
             self._set_bg_color = self._bg_color_pressed
             self._set_icon_color = self._icon_color_pressed
             self.repaint()
-        elif event == QEvent.MouseButtonRelease:
+        elif event == QEvent.Type.MouseButtonRealese:
             self._set_bg_color = self._bg_color_hover
             self._set_icon_color = self._icon_color_hover
             self.repaint()
@@ -165,8 +165,8 @@ class PyLeftButton(QPushButton):
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.change_style(QEvent.MouseButtonPress)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.change_style(QEvent.Type.MouseButtonRealese)
             # SET FOCUS
             self.setFocus()
             # EMIT SIGNAL
@@ -176,8 +176,8 @@ class PyLeftButton(QPushButton):
     # Event triggered after the mouse button is released
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.change_style(QEvent.MouseButtonRelease)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.change_style(QEvent.Type.MouseButtonPress)
             # EMIT SIGNAL
             return self.released.emit()
 

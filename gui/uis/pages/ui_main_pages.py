@@ -41,8 +41,8 @@ class Ui_MainPages(object):
         self.welcome_base.setObjectName(u"welcome_base")
         self.welcome_base.setMinimumSize(QSize(300, 150))
         self.welcome_base.setMaximumSize(QSize(300, 150))
-        self.welcome_base.setFrameShape(QFrame.NoFrame)
-        self.welcome_base.setFrameShadow(QFrame.Raised)
+        self.welcome_base.setFrameShape(QFrame.Shape.NoFrame)
+        self.welcome_base.setFrameShadow(QFrame.Shadow.Raised)
         self.center_page_layout = QVBoxLayout(self.welcome_base)
         self.center_page_layout.setSpacing(10)
         self.center_page_layout.setObjectName(u"center_page_layout")
@@ -51,8 +51,8 @@ class Ui_MainPages(object):
         self.logo.setObjectName(u"logo")
         self.logo.setMinimumSize(QSize(300, 120))
         self.logo.setMaximumSize(QSize(300, 120))
-        self.logo.setFrameShape(QFrame.NoFrame)
-        self.logo.setFrameShadow(QFrame.Raised)
+        self.logo.setFrameShape(QFrame.Shape.NoFrame)
+        self.logo.setFrameShadow(QFrame.Shadow.Raised)
         self.logo_layout = QVBoxLayout(self.logo)
         self.logo_layout.setSpacing(0)
         self.logo_layout.setObjectName(u"logo_layout")
@@ -62,12 +62,12 @@ class Ui_MainPages(object):
 
         self.label = QLabel(self.welcome_base)
         self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.center_page_layout.addWidget(self.label)
 
 
-        self.page_1_layout.addWidget(self.welcome_base, 0, Qt.AlignHCenter)
+        self.page_1_layout.addWidget(self.welcome_base, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.pages.addWidget(self.page_1)
         self.page_2 = QWidget()
@@ -79,9 +79,9 @@ class Ui_MainPages(object):
         self.scroll_area = QScrollArea(self.page_2)
         self.scroll_area.setObjectName(u"scroll_area")
         self.scroll_area.setStyleSheet(u"background: transparent;")
-        self.scroll_area.setFrameShape(QFrame.NoFrame)
-        self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame)
+        self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scroll_area.setWidgetResizable(True)
         self.contents = QWidget()
         self.contents.setObjectName(u"contents")
@@ -98,13 +98,13 @@ class Ui_MainPages(object):
         font.setPointSize(16)
         self.title_label.setFont(font)
         self.title_label.setStyleSheet(u"font-size: 16pt")
-        self.title_label.setAlignment(Qt.AlignCenter)
+        self.title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(self.title_label)
 
         self.description_label = QLabel(self.contents)
         self.description_label.setObjectName(u"description_label")
-        self.description_label.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
+        self.description_label.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignTop)
         self.description_label.setWordWrap(True)
 
         self.verticalLayout.addWidget(self.description_label)
@@ -149,7 +149,7 @@ class Ui_MainPages(object):
         self.empty_page_label = QLabel(self.page_3)
         self.empty_page_label.setObjectName(u"empty_page_label")
         self.empty_page_label.setFont(font)
-        self.empty_page_label.setAlignment(Qt.AlignCenter)
+        self.empty_page_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.page_3_layout.addWidget(self.empty_page_label)
 

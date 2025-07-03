@@ -190,7 +190,7 @@ class PyLeftMenu(QWidget):
             self.animation.setEndValue(self._minimum_width)
             self.toggle_button.set_active_toggle(False)
             self.toggle_button.set_icon(self._icon_path)
-        self.animation.setEasingCurve(QEasingCurve.InOutCubic)
+        self.animation.setEasingCurve(QEasingCurve.Type.InOutCubic)
         self.animation.setDuration(self._duration_time)
         self.animation.start()
 
@@ -198,31 +198,34 @@ class PyLeftMenu(QWidget):
     # ///////////////////////////////////////////////////////////////
     def select_only_one(self, widget: str):
         for btn in self.findChildren(QPushButton):
-            if btn.objectName() == widget:
-                btn.set_active(True)
-            else:
-                btn.set_active(False)
+            if isinstance(btn, PyLeftMenuButton):
+                if btn.objectName() == widget:
+                    btn.set_active(True)
+                else:
+                    btn.set_active(False)
 
     # SELECT ONLY ONE TAB BTN
     # ///////////////////////////////////////////////////////////////
     def select_only_one_tab(self, widget: str):
         for btn in self.findChildren(QPushButton):
-            if btn.objectName() == widget:
-                btn.set_active_tab(True)
-            else:
-                btn.set_active_tab(False)
+            if isinstance(btn, PyLeftMenuButton):
+                if btn.objectName() == widget:
+                    btn.set_active_tab(True)
+                else:
+                    btn.set_active_tab(False)
 
     # DESELECT ALL BTNs
     # ///////////////////////////////////////////////////////////////
     def deselect_all(self):
         for btn in self.findChildren(QPushButton):
-            btn.set_active(False)
+            if isinstance(btn, PyLeftMenuButton):
+                btn.set_active(False)
 
     # DESELECT ALL TAB BTNs
-    # ///////////////////////////////////////////////////////////////
     def deselect_all_tab(self):
         for btn in self.findChildren(QPushButton):
-            btn.set_active_tab(False)
+            if isinstance(btn, PyLeftMenuButton):
+                btn.set_active_tab(False)
 
     # SETUP APP
     # ///////////////////////////////////////////////////////////////

@@ -41,13 +41,13 @@ from gui.widgets import *
 # ///////////////////////////////////////////////////////////////
 from . ui_main import *
 
-# MAIN FUNCTIONS 
+# MAIN FUNCTIONS
 # ///////////////////////////////////////////////////////////////
 from . functions_main_window import *
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
-class SetupMainWindow:
+class SetupMainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         # SETUP MAIN WINDOw
@@ -159,12 +159,12 @@ class SetupMainWindow:
         # APP TITLE
         # ///////////////////////////////////////////////////////////////
         self.setWindowTitle(self.settings["app_name"])
-        
+
         # REMOVE TITLE BAR
         # ///////////////////////////////////////////////////////////////
         if self.settings["custom_title_bar"]:
-            self.setWindowFlag(Qt.FramelessWindowHint)
-            self.setAttribute(Qt.WA_TranslucentBackground)
+            self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+            self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         # ADD GRIPS
         # ///////////////////////////////////////////////////////////////
@@ -285,7 +285,7 @@ class SetupMainWindow:
 
         # PAGE 1 - ADD LOGO TO MAIN PAGE
         self.logo_svg = QSvgWidget(Functions.set_svg_image("logo_home.svg"))
-        self.ui.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
+        self.ui.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignmentFlag.AlignCenter, Qt.AlignmentFlag.AlignCenter)
 
         # PAGE 2
         # CIRCULAR PROGRESS 1
@@ -360,7 +360,7 @@ class SetupMainWindow:
             handle_color_hover = self.themes["app_color"]["context_hover"],
             handle_color_pressed = self.themes["app_color"]["context_pressed"]
         )
-        self.vertical_slider_3.setOrientation(Qt.Horizontal)
+        self.vertical_slider_3.setOrientation(Qt.Orientation.Horizontal)
         self.vertical_slider_3.setMaximumWidth(200)
 
         # PY SLIDER 4
@@ -371,7 +371,7 @@ class SetupMainWindow:
             handle_color_hover = self.themes["app_color"]["context_hover"],
             handle_color_pressed = self.themes["app_color"]["context_pressed"]
         )
-        self.vertical_slider_4.setOrientation(Qt.Horizontal)
+        self.vertical_slider_4.setOrientation(Qt.Orientation.Horizontal)
         self.vertical_slider_4.setMaximumWidth(200)
 
         # ICON BUTTON 1
@@ -493,21 +493,23 @@ class SetupMainWindow:
             context_color = self.themes["app_color"]["context_color"]
         )
         self.table_widget.setColumnCount(3)
-        self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.table_widget.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.table_widget.setSelectionBehavior(QAbstractItemView.SelectRows)
+        header = self.table_widget.horizontalHeader()
+        if header is not None:
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table_widget.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.table_widget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         # Columns / Header
         self.column_1 = QTableWidgetItem()
-        self.column_1.setTextAlignment(Qt.AlignCenter)
+        self.column_1.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         self.column_1.setText("NAME")
 
         self.column_2 = QTableWidgetItem()
-        self.column_2.setTextAlignment(Qt.AlignCenter)
+        self.column_2.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         self.column_2.setText("NICK")
 
         self.column_3 = QTableWidgetItem()
-        self.column_3.setTextAlignment(Qt.AlignCenter)
+        self.column_3.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
         self.column_3.setText("PASS")
 
         # Set column
@@ -521,7 +523,7 @@ class SetupMainWindow:
             self.table_widget.setItem(row_number, 0, QTableWidgetItem(str("Wanderson"))) # Add name
             self.table_widget.setItem(row_number, 1, QTableWidgetItem(str("vfx_on_fire_" + str(x)))) # Add nick
             self.pass_text = QTableWidgetItem()
-            self.pass_text.setTextAlignment(Qt.AlignCenter)
+            self.pass_text.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.pass_text.setText("12345" + str(x))
             self.table_widget.setItem(row_number, 2, self.pass_text) # Add pass
             self.table_widget.setRowHeight(row_number, 22)

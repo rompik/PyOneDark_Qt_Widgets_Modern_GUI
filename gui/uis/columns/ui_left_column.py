@@ -101,7 +101,7 @@ class Ui_LeftColumn(object):
         self.label_2.setObjectName(u"label_2")
         self.label_2.setFont(font)
         self.label_2.setStyleSheet(u"font-size: 16pt")
-        self.label_2.setAlignment(Qt.AlignCenter)
+        self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_2.addWidget(self.label_2)
 
@@ -111,7 +111,7 @@ class Ui_LeftColumn(object):
         font1.setPointSize(9)
         self.label_3.setFont(font1)
         self.label_3.setStyleSheet(u"font-size: 9pt")
-        self.label_3.setAlignment(Qt.AlignCenter)
+        self.label_3.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_3.setWordWrap(True)
 
         self.verticalLayout_2.addWidget(self.label_3)

@@ -119,7 +119,7 @@ class PyTitleBar(QWidget):
                 curso_y = event.globalPos().y() - QCursor.pos().y()
                 parent.move(curso_x, curso_y)
             # MOVE WINDOW
-            if event.buttons() == Qt.LeftButton:
+            if event.buttons() == Qt.MouseButton.LeftButton:
                 parent.move(parent.pos() + event.globalPos() - parent.dragPos)
                 parent.dragPos = event.globalPos()
                 event.accept()
@@ -273,11 +273,11 @@ class PyTitleBar(QWidget):
         self.top_logo_layout.setContentsMargins(0,0,0,0)
         self.logo_svg = QSvgWidget()
         self.logo_svg.load(Functions.set_svg_image(self._logo_image))
-        self.top_logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
+        self.top_logo_layout.addWidget(self.logo_svg, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # TITLE LABEL
         self.title_label = QLabel()
-        self.title_label.setAlignment(Qt.AlignVCenter)
+        self.title_label.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.title_label.setStyleSheet(f'font: {self._title_size}pt "{self._font_family}"')
 
         # CUSTOM BUTTONS LAYOUT

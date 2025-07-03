@@ -101,8 +101,8 @@ class PyLeftMenuButton(QPushButton):
         # PAINTER
         p = QPainter()
         p.begin(self)
-        p.setRenderHint(QPainter.Antialiasing)
-        p.setPen(Qt.NoPen)
+        p.setRenderHint(QPainter.RenderHint.Antialiasing)
+        p.setPen(Qt.PenStyle.NoPen)
         p.setFont(self.font())
 
         # RECTANGLES
@@ -131,7 +131,7 @@ class PyLeftMenuButton(QPushButton):
 
             # DRAW TEXT
             p.setPen(QColor(self._set_text_active))
-            p.drawText(rect_text, Qt.AlignVCenter, self.text())
+            p.drawText(rect_text, Qt.AlignmentFlag.AlignVCenter, self.text())
 
             # DRAW ICONS
             self.icon_paint(p, self._icon_path, rect_icon, self._set_icon_color)
@@ -154,7 +154,7 @@ class PyLeftMenuButton(QPushButton):
 
             # DRAW TEXT
             p.setPen(QColor(self._set_text_active))
-            p.drawText(rect_text, Qt.AlignVCenter, self.text())
+            p.drawText(rect_text, Qt.AlignmentFlag.AlignVCenter, self.text())
 
             # DRAW ICONS
             self.icon_paint(p, self._icon_path, rect_icon, self._set_icon_color)
@@ -168,7 +168,7 @@ class PyLeftMenuButton(QPushButton):
 
                 # DRAW TEXT
                 p.setPen(QColor(self._set_text_foreground))
-                p.drawText(rect_text, Qt.AlignVCenter, self.text())
+                p.drawText(rect_text, Qt.AlignmentFlag.AlignVCenter, self.text())
 
                 # DRAW ICONS
                 if self._is_toggle_active:
@@ -182,7 +182,7 @@ class PyLeftMenuButton(QPushButton):
 
                 # DRAW TEXT
                 p.setPen(QColor(self._set_text_foreground))
-                p.drawText(rect_text, Qt.AlignVCenter, self.text())
+                p.drawText(rect_text, Qt.AlignmentFlag.AlignVCenter, self.text())
 
                 # DRAW ICONS
                 self.icon_paint(p, self._icon_path, rect_icon, self._set_icon_color)
@@ -235,11 +235,11 @@ class PyLeftMenuButton(QPushButton):
     def icon_paint(self, qp, image, rect, color):
         icon = QPixmap(image)
         painter = QPainter(icon)
-        painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
-        painter.fillRect(icon.rect(), color)
+        painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceIn)
+        painter.fillRect(icon.rect(), QColor(color))
         qp.drawPixmap(
-            (rect.width() - icon.width()) / 2,
-            (rect.height() - icon.height()) / 2,
+            int((rect.width() - icon.width()) / 2),
+            int((rect.height() - icon.height()) / 2),
             icon
         )
         painter.end()
@@ -249,8 +249,8 @@ class PyLeftMenuButton(QPushButton):
     def icon_active(self, qp, image, width):
         icon = QPixmap(image)
         painter = QPainter(icon)
-        painter.setCompositionMode(QPainter.CompositionMode_SourceIn)
-        painter.fillRect(icon.rect(), self._bg_one)
+        painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceIn)
+        painter.fillRect(icon.rect(), QColor(self._bg_one))
         qp.drawPixmap(width - 5, 0, icon)
         painter.end()
 
@@ -258,22 +258,22 @@ class PyLeftMenuButton(QPushButton):
     # Functions with custom styles
     # ///////////////////////////////////////////////////////////////
     def change_style(self, event):
-        if event == QEvent.Enter:
+        if event == QEvent.Type.Enter:
             if not self._is_active:
                 self._set_icon_color = self._icon_color_hover
                 self._set_bg_color = self._dark_three
             self.repaint()
-        elif event == QEvent.Leave:
+        elif event == QEvent.Type.Leave:
             if not self._is_active:
                 self._set_icon_color = self._icon_color
                 self._set_bg_color = self._dark_one
             self.repaint()
-        elif event == QEvent.MouseButtonPress:
+        elif event == QEvent.Type.MouseButtonRelease:
             if not self._is_active:
                 self._set_icon_color = self._context_color
                 self._set_bg_color = self._dark_four
             self.repaint()
-        elif event == QEvent.MouseButtonRelease:
+        elif event == QEvent.Type.MouseButtonRelease:
             if not self._is_active:
                 self._set_icon_color = self._icon_color_hover
                 self._set_bg_color = self._dark_three
@@ -283,7 +283,7 @@ class PyLeftMenuButton(QPushButton):
     # Event triggered when the mouse is over the BTN
     # ///////////////////////////////////////////////////////////////
     def enterEvent(self, event):
-        self.change_style(QEvent.Enter)
+        self.change_style(QEvent.Type.Enter)
         if self.width() == 50 and self._tooltip_text:
             self.move_tooltip()
             self.tooltip.show()
@@ -292,15 +292,15 @@ class PyLeftMenuButton(QPushButton):
     # Event fired when the mouse leaves the BTN
     # ///////////////////////////////////////////////////////////////
     def leaveEvent(self, event):
-        self.change_style(QEvent.Leave)
+        self.change_style(QEvent.Type.Leave)
         self.tooltip.hide()
 
     # MOUSE PRESS
     # Event triggered when the left button is pressed
     # ///////////////////////////////////////////////////////////////
     def mousePressEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.change_style(QEvent.MouseButtonPress)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.change_style(QEvent.Type.MouseButtonPress)
             self.tooltip.hide()
             return self.clicked.emit()
 
@@ -308,8 +308,8 @@ class PyLeftMenuButton(QPushButton):
     # Event triggered after the mouse button is released
     # ///////////////////////////////////////////////////////////////
     def mouseReleaseEvent(self, event):
-        if event.button() == Qt.LeftButton:
-            self.change_style(QEvent.MouseButtonRelease)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.change_style(QEvent.Type.MouseButtonPress)
             return self.released.emit()
 
     # MOVE TOOLTIP
